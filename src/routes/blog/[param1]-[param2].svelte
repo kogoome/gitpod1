@@ -3,7 +3,7 @@
 
   // http://localhost:3000/blog/moon-sun 입력하면 
   // @ts-ignore  
-  export const load = async ({params, fetch, session, stuff}) => {
+  export const load = ({params, fetch, session, stuff}) => {
     console.log("params filename [param1] [param2] are url inputs: ")
     console.log(params) // { param1: 'moon', param2: 'sun' }
     const {param1, param2} = params

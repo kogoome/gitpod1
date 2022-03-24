@@ -16,10 +16,16 @@
       <a href="/">Home</a>
     </li>
     <li>
+      <a href="/about">About</a>
+    </li>
+    <li>
       <a href="/todos">Todos</a>
     </li>
     <li>
-      <a href="/about-us">About-us</a>
+      <a href="/todos/must">Must</a>
+    </li>
+    <li>
+      <a href="/blog">Blog</a>
     </li>
   </ul>
 </nav>

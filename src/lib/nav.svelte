@@ -13,7 +13,7 @@
 <nav>
   <ul>
     <li>
-      <a href="/">Home</a>
+      <a href="/">Index</a>
     </li>
     <li>
       <a href="/about">About</a>

@@ -1,4 +1,21 @@
+<script context="module">
+  // @ts-ignore
+  export const load = async ({fetch}) => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts")
+    const posts = await res.json()
+
+    return {
+      props: {
+        posts
+      }
+    }
+  }
+</script>
+
 <script>
+
+// @ts-nocheck
+  export let posts
   const title = "Blog"
 </script>
 <h1>{title}</h1>
@@ -8,4 +25,39 @@
 </svelte:head>
 
 <a href="/1stpost">First post</a>
-<a href="/">Dynamic Parameters</a>
+<a href="/blog/moon-sun">Dynamic Parameters</a>
+
+<h1>Posts</h1>
+
+<div class="posts">
+  {#each posts as item}
+    <div class="post">
+      <h2>{item.title.substring(0, 20)}</h2>
+      <p>{item.body.substring(0, 80)}</p>
+      <p class="link"><a href="/blog/${item.id}">Read more</a></p>
+    </div>
+  {/each}
+</div>
+
+<style>
+  .posts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .post {
+    padding: 10px ;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px #eee;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  .link {
+    text-align: right;
+  }
+</style>

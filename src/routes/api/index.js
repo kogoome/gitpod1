@@ -1,11 +1,26 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 export const get = async () => {
-
-  console.log("api > index.js 파일 실행 중")
-
   return {
     status: 200,
     body: {
       x: "index"
+    }
+  }
+}
+
+// @ts-ignore
+export const post = async ({ request }) => {
+
+  // fetch 요청 처리 (json)
+  const data = await request.json() // .text() 도 사용 가능. 비추
+  const name = data.name
+  const email = data.email
+
+  return {
+    status: 200,
+    body: {
+      name, email
     }
   }
 }

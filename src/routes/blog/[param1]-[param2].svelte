@@ -19,6 +19,7 @@
 </script>
 
 <script>
+// @ts-nocheck
   // 위 함수에서 리턴한 프롭스를 여기에서 공간만들고 받아둔다.
   export let param1
   export let param2

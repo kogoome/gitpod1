@@ -24,7 +24,7 @@
   <title>{title}</title>
 </svelte:head>
 
-<a href="/1stpost">First post</a>
+<a href="/blog/1stpost">First post</a>
 <a href="/blog/moon-sun">Dynamic Parameters</a>
 
 <h1>Posts</h1>
@@ -34,7 +34,7 @@
     <div class="post">
       <h2>{item.title.substring(0, 20)}</h2>
       <p>{item.body.substring(0, 80)}</p>
-      <p class="link"><a href="/blog/${item.id}">Read more</a></p>
+      <p class="link"><a href="/blog/{item.id}">Read more</a></p>
     </div>
   {/each}
 </div>

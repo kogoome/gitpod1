@@ -13,12 +13,38 @@
 </script>
 
 <script>
-
 // @ts-nocheck
   export let posts
   const title = "Blog"
+  let pageSize = 4
+  let currentPage = 1
+  let totalPages
+  let searchTerm = ""
+  let pagitems = []
+  
+  const paginatedItems = (searchedPosts, pageSize, currentPage) => {
+    return searchedPosts.slice(
+      (currentPage - 1) * pageSize,
+      (currentPage - 1) * pageSize + pageSize
+    )
+  }
+  const nextPage = () => {
+    if (currentPage < totalPages) { currentPage++ }
+  }
+  const beforePage = () => {
+    if (currentPage > 1) { currentPage-- }
+  }
+  
+  $: searchedPosts = posts.filter((post) => {
+    return post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  })
+  $: totalPages = Math.ceil(searchedPosts.length/pageSize)
+  $: pagitems = paginatedItems(searchedPosts, pageSize, currentPage)
+  
 </script>
 <h1>{title}</h1>
+
+<input type="text" placeholder="search" bind:value={searchTerm}>
 
 <svelte:head>
   <title>{title}</title>
@@ -30,7 +56,7 @@
 <h1>Posts</h1>
 
 <div class="posts">
-  {#each posts as item}
+  {#each pagitems as item}
     <div class="post">
       <h2>{item.title.substring(0, 20)}</h2>
       <p>{item.body.substring(0, 80)}</p>
@@ -38,6 +64,11 @@
     </div>
   {/each}
 </div>
+<h1>
+  1 ... {currentPage} ... {totalPages}
+  <span on:click={beforePage}>before</span>
+  <span on:click={nextPage}>next</span>
+</h1>
 
 <style>
   .posts {

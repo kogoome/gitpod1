@@ -65,7 +65,7 @@
       </div>
     {/each}
   {:else}
-    <p>No posts found</p>
+    <p>No posts found with "{searchTerm}"</p>
   {/if}
 </div>
 <h1>

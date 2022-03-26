@@ -21,7 +21,7 @@
   let totalPages
   let searchTerm = ""
   let pagitems = []
-  
+
   const paginatedItems = (searchedPosts, pageSize, currentPage) => {
     return searchedPosts.slice(
       (currentPage - 1) * pageSize,
@@ -40,7 +40,7 @@
   })
   $: totalPages = Math.ceil(searchedPosts.length/pageSize)
   $: pagitems = paginatedItems(searchedPosts, pageSize, currentPage)
-  
+  $: currentPage = currentPage>totalPages?totalPages==0?totalPages+1:totalPages:currentPage
 </script>
 <h1>{title}</h1>
 
@@ -56,13 +56,17 @@
 <h1>Posts</h1>
 
 <div class="posts">
-  {#each pagitems as item}
-    <div class="post">
-      <h2>{item.title.substring(0, 20)}</h2>
-      <p>{item.body.substring(0, 80)}</p>
-      <p class="link"><a href="/blog/{item.id}">Read more</a></p>
-    </div>
-  {/each}
+  {#if pagitems.length}
+    {#each pagitems as item}
+      <div class="post">
+        <h2>{item.title.substring(0, 20)}</h2>
+        <p>{item.body.substring(0, 80)}</p>
+        <p class="link"><a href="/blog/{item.id}">Read more</a></p>
+      </div>
+    {/each}
+  {:else}
+    <p>No posts found</p>
+  {/if}
 </div>
 <h1>
   1 ... {currentPage} ... {totalPages}

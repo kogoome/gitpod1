@@ -8,17 +8,11 @@
     // const allPosts = await postRes.json()
 
     // refactoring
-    const [userRes, postRes] = await Promise.all([
-      fetch(`https://jsonplaceholder.typicode.com/users/${id}`),
-      fetch('https://jsonplaceholder.typicode.com/posts')
-    ])
-    const user = await userRes.json()
-    const allPosts = await postRes.json()
-    
-    const posts = allPosts.filter(post => {
-      return post.userId == id
-    })
+    const userRes = await fetch(`https://jsonplaceholder.typicode.com/users/${id}?_embed=posts`)
 
+    const user = await userRes.json()
+    const posts = await user.posts
+    
     return {
       props: {
         user,
@@ -42,7 +36,7 @@
 <p>email : {user.email}</p>
 <p>website : {user.website}</p>
 
-<h3>Posts by this author</h3>
+<h3>Posts by this {user.name}</h3>
 <ul>
   {#each posts as post}
     <li>

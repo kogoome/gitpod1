@@ -44,7 +44,6 @@
 </script>
 <h1>{title}</h1>
 
-<input type="text" placeholder="search" bind:value={searchTerm}>
 
 <svelte:head>
   <title>{title}</title>
@@ -55,6 +54,7 @@
 
 <h1>Posts</h1>
 
+<input type="text" placeholder="search" bind:value={searchTerm}>
 <div class="posts">
   {#if pagitems.length}
     {#each pagitems as item}
@@ -75,6 +75,9 @@
 </h1>
 
 <style>
+  input {
+    margin-left: 10%;
+  }
   .posts {
     display: grid;
     grid-template-columns: 1fr 1fr;
